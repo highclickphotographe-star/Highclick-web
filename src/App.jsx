@@ -5,14 +5,15 @@ import Decor from "./components/Decor.jsx";
 import Nav from "./components/Nav.jsx";
 import Hero from "./components/Hero.jsx";
 import About from "./components/About.jsx";
-import Films from "./components/Films.jsx";
+import Films from "./components/Portfolio.jsx";
 import Services from "./components/Services.jsx";
 import Destination from "./components/Destination.jsx";
 import Testimonial from "./components/Testimonial.jsx";
 import Contact from "./components/Contact.jsx";
 import Footer from "./components/Footer.jsx";
-import Lightbox from "./components/Lightbox.jsx";
-import VideoModal from "./components/VideoModal.jsx";
+import Brands from "./components/Brands.jsx";
+// import Lightbox from "./components/Lightbox.jsx";
+// import VideoModal from "./components/VideoModal.jsx";
 
 export default function App() {
   useEffect(() => {
@@ -29,18 +30,19 @@ export default function App() {
 
   return (
     <div id="hcs-root">
-      <Decor />
+      {/* <Decor /> */}
       <Nav />
       <Hero />
       <About />
       <Films />
+      <Brands />
       <Services />
-      <Destination />
+      {/* <Destination /> */}
       <Testimonial />
       <Contact />
       <Footer />
-      <Lightbox />
-      <VideoModal />
+      {/* <Lightbox /> */}
+      {/* <VideoModal /> */}
     </div>
   );
 }

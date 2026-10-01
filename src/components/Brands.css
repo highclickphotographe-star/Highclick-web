@@ -1,0 +1,120 @@
+/* =========================================================
+   BRANDS — Continuous Logo Marquee
+   ========================================================= */
+
+.brands {
+  padding: 48px 0;
+  background: #faf6ee;
+  border-top: 1px solid rgba(21, 18, 15, 0.06);
+  border-bottom: 1px solid rgba(21, 18, 15, 0.06);
+  overflow: hidden;
+  font-family: "Larsseit", "Hanken Grotesk", sans-serif;
+}
+
+/* Header */
+.brands__header {
+  max-width: 1400px;
+  margin: 0 auto 28px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.brands__label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #b9975b;
+}
+
+/* Track */
+.brands__track {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  width: max-content;
+  animation: brandsScroll 28s linear infinite;
+}
+
+.brands__track:hover {
+  animation-play-state: paused;
+}
+
+.brands__item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  min-width: 120px;
+}
+
+.brands__item img {
+  max-height: 40px;
+  max-width: 140px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%) opacity(0.55);
+  transition:
+    filter 0.35s ease,
+    opacity 0.35s ease;
+}
+
+.brands__item:hover img {
+  filter: grayscale(0%) opacity(1);
+}
+
+.brands__fallback {
+  display: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(28, 23, 18, 0.4);
+  white-space: nowrap;
+}
+
+@keyframes brandsScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .brands__track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    gap: 32px;
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .brands {
+    padding: 36px 0;
+  }
+
+  .brands__header {
+    margin-bottom: 22px;
+  }
+
+  .brands__track {
+    gap: 40px;
+    animation-duration: 22s;
+  }
+
+  .brands__item {
+    height: 40px;
+    min-width: 100px;
+  }
+
+  .brands__item img {
+    max-height: 32px;
+    max-width: 110px;
+  }
+}

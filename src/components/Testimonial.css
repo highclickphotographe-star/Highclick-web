@@ -1,0 +1,202 @@
+/* =========================================================
+   TESTIMONIALS — 3 per page + Slider
+   ========================================================= */
+
+.testimonials {
+  padding: var(--section-y) 0;
+  background: #faf6ee;
+  color: #15120f;
+  font-family: "Larsseit", "Hanken Grotesk", sans-serif;
+}
+
+/* Header */
+.testimonials__header {
+  max-width: var(--maxw);
+  margin: 0 auto 48px;
+  padding: 0 var(--gutter);
+}
+
+.testimonials__label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #b9975b;
+  margin-bottom: 0.9rem;
+}
+
+.testimonials__title {
+  font-family: "Larsseit", sans-serif;
+  font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  color: #15120f;
+  margin: 0;
+}
+
+/* Slider */
+.testimonials__slider {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  /* vertical room so hover lift + shadow are not clipped by overflow */
+  padding: 8px var(--gutter) 28px;
+  margin-bottom: -20px;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+.testimonials__track {
+  display: flex;
+  transition: transform 0.8s var(--ease-out);
+  will-change: transform;
+}
+
+/* Each page = 3 cards */
+.testimonials__page {
+  min-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* Card */
+.testimonials__card {
+  background: #fff;
+  border: 1px solid rgba(21, 18, 15, 0.06);
+  border-radius: 4px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition:
+    border-color 0.4s var(--ease-soft),
+    transform 0.5s var(--ease-out),
+    box-shadow 0.5s var(--ease-out);
+}
+
+.testimonials__card:hover {
+  border-color: rgba(185, 151, 91, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px -20px rgba(21, 18, 15, 0.1);
+}
+
+.testimonials__quote {
+  font-family: "Larsseit", sans-serif;
+  font-size: 1.02rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: #15120f;
+  margin: 0 0 28px;
+  letter-spacing: -0.01em;
+  flex-grow: 1;
+}
+
+.testimonials__author {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.testimonials__author strong {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #15120f;
+}
+
+.testimonials__author span {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: rgba(28, 23, 18, 0.5);
+}
+
+/* Controls */
+.testimonials__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.testimonials__arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(21, 18, 15, 0.12);
+  background: transparent;
+  color: #15120f;
+  font-size: 1.1rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    border-color 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s var(--ease-out);
+}
+
+.testimonials__arrow:hover {
+  border-color: #b9975b;
+  color: #b9975b;
+}
+
+.testimonials__arrow:active {
+  transform: scale(0.94);
+}
+
+.testimonials__dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.testimonials__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 100px;
+  border: none;
+  background: rgba(21, 18, 15, 0.18);
+  cursor: pointer;
+  padding: 0;
+  transition:
+    width 0.4s var(--ease-out),
+    background-color 0.3s ease;
+}
+
+.testimonials__dot.is-active {
+  background: #b9975b;
+  width: 24px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1000px) {
+  .testimonials__page {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .testimonials {
+    padding: 56px 0;
+  }
+
+  .testimonials__header {
+    margin-bottom: 32px;
+  }
+
+  .testimonials__page {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .testimonials__card {
+    padding: 28px 22px;
+  }
+
+  .testimonials__controls {
+    margin-top: 32px;
+  }
+}

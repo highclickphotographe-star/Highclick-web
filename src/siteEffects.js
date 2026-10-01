@@ -16,7 +16,7 @@ export function initSiteEffects() {
   document.documentElement.classList.add("js-anim");
 
   /* ---------------- ambient luxury orbs ---------------- */
-  if (!reduceMotion) {
+  if (false) {
     var orbHost = document.body;
     ["o1", "o2", "o3"].forEach(function (cls) {
       var orb = document.createElement("div");
@@ -46,14 +46,14 @@ export function initSiteEffects() {
   /* ---------------- nav: solid on scroll + theme (light/dark sections) ---------------- */
   var nav = document.getElementById("nav");
   var lightSections = document.querySelectorAll(
-    ".about, .services, .destination, footer",
+    ".about, .portfolio, .services, .testimonials, .contact, .footer, .destination",
   );
 
   function updateNav() {
     var y = window.scrollY;
     nav.classList.toggle("scrolled", y > 40);
 
-    var navMid = 46;
+    var navMid = nav.offsetHeight / 2;
     var onLight = false;
     lightSections.forEach(function (sec) {
       var r = sec.getBoundingClientRect();
@@ -61,24 +61,65 @@ export function initSiteEffects() {
     });
     nav.classList.toggle("on-light", onLight);
   }
-  window.addEventListener("scroll", updateNav, { passive: true });
+  var navTicking = false;
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (navTicking) return;
+      navTicking = true;
+      requestAnimationFrame(function () {
+        updateNav();
+        updateNavSpy();
+        navTicking = false;
+      });
+    },
+    { passive: true },
+  );
   updateNav();
+
+  /* nav scrollspy — highlights the link for the section under the header */
+  var spyIds = ["#home", "#about", "#films", "#services", "#stories", "#contact"];
+  var spyEls = spyIds.map(function (id) {
+    return document.querySelector(id);
+  });
+  function updateNavSpy() {
+    var probe = window.innerHeight * 0.35;
+    var active = "#home";
+    spyEls.forEach(function (el, i) {
+      if (el && el.getBoundingClientRect().top <= probe) active = spyIds[i];
+    });
+    document.querySelectorAll(".nav-links a").forEach(function (a) {
+      var on = a.getAttribute("href") === active;
+      a.classList.toggle("is-active", on);
+      if (on) a.setAttribute("aria-current", "true");
+      else a.removeAttribute("aria-current");
+    });
+  }
+  updateNavSpy();
 
   /* ---------------- mobile menu ---------------- */
   var hamburger = document.getElementById("hamburger");
   function closeMobileMenu() {
     document.body.classList.remove("menu-open");
-    hamburger.setAttribute("aria-expanded", "false");
+    if (hamburger) hamburger.setAttribute("aria-expanded", "false");
   }
-  hamburger.addEventListener("click", function () {
-    var open = document.body.classList.toggle("menu-open");
-    hamburger.setAttribute("aria-expanded", open ? "true" : "false");
+  if (hamburger) {
+    hamburger.addEventListener("click", function () {
+      var open = document.body.classList.toggle("menu-open");
+      hamburger.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  }
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeMobileMenu();
+  });
+  window.addEventListener("resize", function () {
+    if (window.innerWidth > 980) closeMobileMenu();
   });
 
   /* ---------------- custom cursor ---------------- */
-  if (!isTouch) {
-    var dot = document.getElementById("cursorDot");
-    var ring = document.getElementById("cursorRing");
+  var dot = document.getElementById("cursorDot");
+  var ring = document.getElementById("cursorRing");
+  if (!isTouch && dot && ring) {
     var rx = 0,
       ry = 0,
       tx = 0,
@@ -215,6 +256,7 @@ export function initSiteEffects() {
     });
   });
   function updateDots() {
+    if (!dots.length) return;
     var mid = window.scrollY + window.innerHeight * 0.4;
     var activeIndex = 0;
     sections.forEach(function (sec, i) {
