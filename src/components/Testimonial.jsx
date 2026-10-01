@@ -1,252 +1,152 @@
-/** Testimonial section */
-export default function Testimonial() {
+import { useState, useEffect, useRef } from "react";
+import "./Testimonial.css";
+
+const testimonials = [
+  {
+    id: 1,
+    quote:
+      "Thank you High Click Studio for capturing the best moments of our wedding and reception. We loved the pre-wedding shoots and the traditional pictures. The team was flexible and followed up until we received our albums.",
+    name: "Theebica & Purushoth",
+    place: "Chennai",
+  },
+  {
+    id: 2,
+    quote:
+      "We had the pleasure of working with High Click Studio for our engagement, reception and wedding. From start to finish their team showed incredible professionalism and creativity. Every frame felt intentional.",
+    name: "Jeevitha & Pawan",
+    place: "Coimbatore",
+  },
+  {
+    id: 3,
+    quote:
+      "Wonderful experience from the pre-shoot all the way through the wedding. The pictures were beautifully captured and they create amazing reels. The team was patient and made us feel completely at ease.",
+    name: "Aishwarya & Rahul",
+    place: "Bangalore",
+  },
+  {
+    id: 4,
+    quote:
+      "The candid and traditional photography teams were exceptional. The videography was stunning and every important detail was covered flawlessly. You’ve helped us relive our big day in the best way possible.",
+    name: "Nivya & Manoj",
+    place: "Chennai",
+  },
+  {
+    id: 5,
+    quote:
+      "Great teamwork and the crew members were super friendly and talented. The album and photo quality came out beautifully. Thank you to the entire team for making our day feel so special.",
+    name: "Pooja & Raveen",
+    place: "Hyderabad",
+  },
+  {
+    id: 6,
+    quote:
+      "Professional staff who showed patience throughout the event. The wedding teaser was awesome and deliverables were exactly as promised. We are fully satisfied and would definitely recommend them.",
+    name: "Amrin & Saleem",
+    place: "Chennai",
+  },
+];
+
+const PER_PAGE = 3;
+
+export default function Testimonials() {
+  const totalPages = Math.ceil(testimonials.length / PER_PAGE);
+  const [page, setPage] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const touchX = useRef(null);
+
+  // autoplay — pauses while hovering/focusing so cards never move under the cursor
+  useEffect(() => {
+    if (paused) return;
+    const timer = setInterval(() => {
+      setPage((prev) => (prev + 1) % totalPages);
+    }, 7000);
+    return () => clearInterval(timer);
+  }, [totalPages, paused, page]);
+
+  const onTouchStart = (e) => {
+    touchX.current = e.touches[0].clientX;
+  };
+  const onTouchEnd = (e) => {
+    if (touchX.current == null) return;
+    const dx = e.changedTouches[0].clientX - touchX.current;
+    touchX.current = null;
+    if (Math.abs(dx) > 50) dx < 0 ? next() : prev();
+  };
+
+  const prev = () => setPage((p) => (p - 1 + totalPages) % totalPages);
+  const next = () => setPage((p) => (p + 1) % totalPages);
+
   return (
-    <>
-{/* ============================== TESTIMONIAL ============================== */}
-    <section className="testimonial" id="stories">
-      {/* warm stage: gold curves, petals, side labels, botanical */}
-      <div className="testi-scenery" aria-hidden="true">
-        <svg
-          className="testi-curve testi-curve-tl"
-          viewBox="0 0 480 320"
-          fill="none"
-        >
-          <defs>
-            <linearGradient id="tcTL" x1="0" y1="1" x2="1" y2="0">
-              <stop offset="0" stopColor="#c9a86c" stopOpacity="0" />
-              <stop offset="0.35" stopColor="#c9a86c" stopOpacity="0.85" />
-              <stop offset="0.7" stopColor="#e8c48a" stopOpacity="0.7" />
-              <stop offset="1" stopColor="#c9a86c" stopOpacity="0" />
-            </linearGradient>
-            <filter id="tcGlow">
-              <feGaussianBlur stdDeviation="1.8" result="b" />
-              <feMerge>
-                <feMergeNode in="b" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-          <g filter="url(#tcGlow)">
-            <path
-              className="testi-draw"
-              pathLength="1"
-              d="M0 280 C 80 200, 160 240, 240 140 C 300 80, 380 40, 480 20"
-              stroke="url(#tcTL)"
-              strokeWidth="1.4"
-              strokeLinecap="round"
-            />
-            <path
-              className="testi-draw testi-draw-soft"
-              pathLength="1"
-              d="M40 300 C 120 220, 200 260, 280 180"
-              stroke="url(#tcTL)"
-              strokeWidth="0.9"
-              opacity="0.5"
-            />
-          </g>
-        </svg>
-        <svg
-          className="testi-curve testi-curve-tr"
-          viewBox="0 0 400 280"
-          fill="none"
-        >
-          <defs>
-            <linearGradient id="tcTR" x1="1" y1="1" x2="0" y2="0">
-              <stop offset="0" stopColor="#c9a86c" stopOpacity="0" />
-              <stop offset="0.4" stopColor="#c9a86c" stopOpacity="0.8" />
-              <stop offset="1" stopColor="#e8c48a" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <g filter="url(#tcGlow)">
-            <path
-              className="testi-draw"
-              pathLength="1"
-              d="M400 240 C 320 180, 260 200, 180 120 C 120 70, 60 40, 0 10"
-              stroke="url(#tcTR)"
-              strokeWidth="1.3"
-              strokeLinecap="round"
-            />
-          </g>
-        </svg>
-        <svg
-          className="testi-curve testi-curve-bl"
-          viewBox="0 0 420 260"
-          fill="none"
-        >
-          <defs>
-            <linearGradient id="tcBL" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stopColor="#c9a86c" stopOpacity="0.9" />
-              <stop offset="0.55" stopColor="#e8c48a" stopOpacity="0.7" />
-              <stop offset="1" stopColor="#c9a86c" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <g filter="url(#tcGlow)">
-            <path
-              className="testi-draw"
-              pathLength="1"
-              d="M0 40 C 70 100, 150 30, 240 90 C 310 130, 360 180, 420 230"
-              stroke="url(#tcBL)"
-              strokeWidth="1.3"
-              strokeLinecap="round"
-            />
-          </g>
-        </svg>
-        <svg
-          className="testi-curve testi-curve-br"
-          viewBox="0 0 420 260"
-          fill="none"
-        >
-          <defs>
-            <linearGradient id="tcBR" x1="1" y1="0" x2="0" y2="1">
-              <stop offset="0" stopColor="#c9a86c" stopOpacity="0.9" />
-              <stop offset="0.55" stopColor="#e8c48a" stopOpacity="0.7" />
-              <stop offset="1" stopColor="#c9a86c" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <g filter="url(#tcGlow)">
-            <path
-              className="testi-draw"
-              pathLength="1"
-              d="M420 40 C 350 100, 270 30, 180 90 C 110 130, 60 180, 0 230"
-              stroke="url(#tcBR)"
-              strokeWidth="1.3"
-              strokeLinecap="round"
-            />
-          </g>
-        </svg>
-
-        {/* botanical sketch near polaroid */}
-        <svg className="testi-botanical" viewBox="0 0 120 180" fill="none">
-          <path
-            d="M20 170 C 30 120, 50 90, 55 40"
-            stroke="#c9a86c"
-            strokeWidth="1"
-            opacity="0.55"
-          />
-          <path
-            d="M55 90 C 70 80, 95 85, 110 70"
-            stroke="#c9a86c"
-            strokeWidth="0.9"
-            opacity="0.45"
-          />
-          <path
-            d="M50 120 C 35 110, 20 115, 10 100"
-            stroke="#c9a86c"
-            strokeWidth="0.9"
-            opacity="0.45"
-          />
-          <path
-            d="M58 55 C 72 48, 88 52, 100 40"
-            stroke="#c9a86c"
-            strokeWidth="0.8"
-            opacity="0.4"
-          />
-          <ellipse
-            cx="55"
-            cy="38"
-            rx="8"
-            ry="12"
-            stroke="#c9a86c"
-            strokeWidth="0.8"
-            opacity="0.4"
-            transform="rotate(-20 55 38)"
-          />
-          <ellipse
-            cx="48"
-            cy="70"
-            rx="6"
-            ry="10"
-            stroke="#c9a86c"
-            strokeWidth="0.7"
-            opacity="0.35"
-            transform="rotate(25 48 70)"
-          />
-        </svg>
-
-        <span className="testi-petal p1"></span>
-        <span className="testi-petal p2"></span>
-        <span className="testi-petal p3"></span>
-        <span className="testi-petal p4"></span>
-        <span className="testi-petal p5"></span>
-        <span className="testi-petal p6"></span>
-        <span className="testi-bokeh b1"></span>
-        <span className="testi-bokeh b2"></span>
-        <span className="testi-bokeh b3"></span>
-        <span className="testi-bokeh b4"></span>
+    <section className="testimonials" id="stories">
+      <div className="testimonials__header" data-reveal>
+        <span className="testimonials__label">Testimonials</span>
+        <h2 className="testimonials__title">Kind Words</h2>
       </div>
 
-      {/* side labels */}
-      <span className="testi-side-label testi-side-tl" aria-hidden="true"
-        >A Day<br />A Thousand<br />Emotions</span
+      <div
+        className="testimonials__slider"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocus={() => setPaused(true)}
+        onBlur={() => setPaused(false)}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
       >
-      <span className="testi-side-label testi-side-bl" aria-hidden="true"
-        >Weddings<br />Through<br />Our Lens</span
-      >
-      <span className="testi-side-label testi-side-tr" aria-hidden="true"
-        >Real People<br />Real Moments</span
-      >
-      <div className="testi-side-rail" aria-hidden="true">
-        <span className="testi-rail-label">Stories</span>
-        <span className="testi-rail-line"></span>
-        <span className="testi-rail-dot active"></span>
-        <span className="testi-rail-dot"></span>
-        <span className="testi-rail-dot"></span>
-      </div>
-
-      <div className="wrap testi-grid">
-        <figure className="polaroid" data-reveal>
-          <img
-            id="testiImg"
-            src="media/home-3-bw.jpg"
-            alt="Couple portrait, black and white"
-          />
-          <figcaption>
-            <span className="polaroid-names" id="testiTag"
-              >Aishwarya &amp; Karthik</span
+        <div
+          className="testimonials__track"
+          style={{ transform: `translateX(-${page * 100}%)` }}
+        >
+          {Array.from({ length: totalPages }).map((_, pageIndex) => (
+            <div
+              key={pageIndex}
+              className="testimonials__page"
+              aria-hidden={pageIndex !== page}
             >
-            <span className="polaroid-place" id="testiPlace">Chennai</span>
-          </figcaption>
-        </figure>
-
-        <div className="testi-copy" data-reveal data-reveal-delay="1">
-          <span className="testi-quote-mark" aria-hidden="true">&ldquo;</span>
-          <p className="testi-quote" id="testiQuote">
-            They didn't direct our wedding, they disappeared into it — and
-            somehow that's how every real moment got caught.
-          </p>
-          <p className="testi-name" id="testiName">
-            <b>Aishwarya &amp; Karthik</b> · Chennai
-          </p>
-          <div className="testi-controls">
-            <button id="testiPrev" aria-label="Previous story">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                strokeWidth="1.6"
-              >
-                <path d="M10 2L4 8L10 14" />
-              </svg>
-            </button>
-            <button id="testiNext" aria-label="Next story">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                strokeWidth="1.6"
-              >
-                <path d="M6 2L12 8L6 14" />
-              </svg>
-            </button>
-            <div className="testi-dots" id="testiDots">
-              <span className="active"></span><span></span><span></span>
+              {testimonials
+                .slice(pageIndex * PER_PAGE, pageIndex * PER_PAGE + PER_PAGE)
+                .map((item) => (
+                  <article key={item.id} className="testimonials__card">
+                    <p className="testimonials__quote">“{item.quote}”</p>
+                    <div className="testimonials__author">
+                      <strong>{item.name}</strong>
+                      <span>{item.place}</span>
+                    </div>
+                  </article>
+                ))}
             </div>
-          </div>
+          ))}
         </div>
       </div>
+
+      {/* Controls */}
+      <div className="testimonials__controls">
+        <button
+          className="testimonials__arrow"
+          onClick={prev}
+          aria-label="Previous"
+        >
+          ←
+        </button>
+
+        <div className="testimonials__dots">
+          {Array.from({ length: totalPages }).map((_, i) => (
+            <button
+              key={i}
+              className={`testimonials__dot ${i === page ? "is-active" : ""}`}
+              onClick={() => setPage(i)}
+              aria-label={`Go to page ${i + 1}`}
+            />
+          ))}
+        </div>
+
+        <button
+          className="testimonials__arrow"
+          onClick={next}
+          aria-label="Next"
+        >
+          →
+        </button>
+      </div>
     </section>
-    </>
   );
 }

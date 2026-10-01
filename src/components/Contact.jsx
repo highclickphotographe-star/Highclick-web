@@ -1,93 +1,134 @@
-/** Contact section */
+import { useState } from "react";
+import "./Contact.css";
+
 export default function Contact() {
+  const [showForm, setShowForm] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // handle form later
+  };
+
   return (
     <>
-{/* ============================== FINAL CTA ============================== */}
-    <section className="final-cta lux-contact" id="contact">
-      <div className="lux-contact-bg" aria-hidden="true">
-        <span className="lux-petal p1"></span>
-        <span className="lux-petal p2"></span>
-        <span className="lux-petal p3"></span>
-        <span className="lux-petal p4"></span>
-        <span className="lux-petal p5"></span>
-        <span className="lux-petal p6"></span>
-        <svg className="lux-curve lux-curve-tl" viewBox="0 0 420 320" fill="none">
-          <path d="M0 300 C 100 140, 200 220, 320 60 S 400 30, 420 10" stroke="#B9975B" strokeWidth="1.15" opacity="0.4"/>
-        </svg>
-        <svg className="lux-curve lux-curve-br" viewBox="0 0 420 320" fill="none">
-          <path d="M420 10 C 340 180, 240 100, 120 240 S 40 280, 0 300" stroke="#B9975B" strokeWidth="1.15" opacity="0.35"/>
-        </svg>
-      </div>
+      {/* CTA Banner on main page */}
+      <section className="contact-cta" id="contact">
+        <div className="contact-cta__media">
+          <img
+            src="media/letsconnect.jpeg"
+            alt="High Click Studio"
+            loading="lazy"
+            onError={(e) => {
+              e.target.src =
+                "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1600&q=80";
+            }}
+          />
+          <div className="contact-cta__overlay" />
+        </div>
 
-      <div className="wrap lux-contact-grid">
-        <div className="lux-contact-form-col" data-reveal>
-          <span className="lux-contact-rule"></span>
-          <h2 className="lux-contact-title">Get In <span className="gold">Touch</span></h2>
-          <p className="lux-contact-lead">
-            We&rsquo;d love to hear from you. Share your plans, ideas or questions
-            and we&rsquo;ll get back to you soon.
+        <div className="contact-cta__content">
+          <span className="contact-cta__label">Contact</span>
+          <h2 className="contact-cta__title">
+            Let’s create
+            <span>something timeless</span>
+          </h2>
+          <p className="contact-cta__text">
+            Tell us about your story. We’ll get back to you within 24 hours.
           </p>
+        </div>
 
-          <form className="lux-form" id="contactForm" onSubmit={(e) => e.preventDefault()}>
-            <div className="lux-form-row">
-              <input type="text" name="name" placeholder="Your Name" required />
-              <input type="email" name="email" placeholder="Your Email" required />
-            </div>
-            <input type="tel" name="phone" placeholder="Phone Number" />
-            <select name="enquiry" aria-label="Type of Enquiry">
-              <option value="">Type of Enquiry</option>
-              <option>Wedding Photography</option>
-              <option>Cinematic Film</option>
-              <option>Pre-Wedding Shoot</option>
-              <option>Destination Wedding</option>
-              <option>Other</option>
-            </select>
-            <textarea name="message" rows="4" placeholder="Your Message"></textarea>
-            <button type="submit" className="lux-send-btn">
-              Send Message
-              <span className="send-arrow">→</span>
+        <button
+          type="button"
+          className="contact-cta__btn"
+          onClick={() => setShowForm(true)}
+        >
+          Let’s Connect
+        </button>
+      </section>
+
+      {/* Form Overlay (acts as separate page) */}
+      {showForm && (
+        <div className="contact-form-page">
+          <div className="contact-form-page__inner">
+            <button
+              type="button"
+              className="contact-form-page__close"
+              onClick={() => setShowForm(false)}
+            >
+              ← Back
             </button>
-          </form>
-        </div>
 
-        <div className="lux-contact-info" data-reveal data-reveal-delay="1">
-          <div className="lux-info-item">
-            <span className="lux-info-icon">📍</span>
-            <div>
-              <b>Location</b>
-              <span>Adyar, Chennai</span>
-            </div>
-          </div>
-          <div className="lux-info-item">
-            <span className="lux-info-icon">📞</span>
-            <div>
-              <b>Phone</b>
-              <a href="tel:+919514284820">+91 95142 84820</a>
-            </div>
-          </div>
-          <div className="lux-info-item">
-            <span className="lux-info-icon">✉️</span>
-            <div>
-              <b>Email</b>
-              <a href="mailto:highclickphotographe.com">highclickphotographe.com</a>
-            </div>
-          </div>
-          <div className="lux-info-item">
-            <span className="lux-info-icon">🌐</span>
-            <div>
-              <b>WhatsApp</b>
-              <a href="https://wa.me/919514284820" target="_blank" rel="noopener">Chat with us</a>
-            </div>
-          </div>
-        </div>
+            <span className="contact-form-page__label">Contact</span>
+            <h2 className="contact-form-page__title">Let’s Connect</h2>
+            <p className="contact-form-page__text">
+              Tell us about your story. We’ll get back to you within 24 hours.
+            </p>
 
-        <div className="lux-contact-photo" data-reveal data-reveal-delay="2">
-          <div className="lux-arch">
-            <img src="media/home-4.jpg" alt="Bride and groom under floral arch" loading="lazy" />
+            <form className="contact-form-page__form" onSubmit={handleSubmit}>
+              <div className="contact-form-page__row">
+                <div className="contact-form-page__field">
+                  <label htmlFor="name">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Your name"
+                    required
+                  />
+                </div>
+                <div className="contact-form-page__field">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Your email"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="contact-form-page__field">
+                <label htmlFor="phone">Phone</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="Phone number"
+                />
+              </div>
+
+              <div className="contact-form-page__field">
+                <label htmlFor="enquiry">Type of Enquiry</label>
+                <select id="enquiry" name="enquiry" defaultValue="">
+                  <option value="" disabled>
+                    Select an option
+                  </option>
+                  <option>Wedding Film</option>
+                  <option>Photography</option>
+                  <option>Pre-Wedding</option>
+                  <option>Commercial</option>
+                  <option>Other</option>
+                </select>
+              </div>
+
+              <div className="contact-form-page__field">
+                <label htmlFor="message">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  placeholder="Tell us about your project..."
+                />
+              </div>
+
+              <button type="submit" className="contact-form-page__submit">
+                Send Message
+              </button>
+            </form>
           </div>
         </div>
-      </div>
-    </section>
+      )}
     </>
   );
 }

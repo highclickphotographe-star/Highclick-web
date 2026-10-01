@@ -1,0 +1,140 @@
+/* =========================================================
+   FOOTER — Light (matches site)
+   ========================================================= */
+
+.footer {
+  background: #faf6ee;
+  color: #15120f;
+  font-family: "Larsseit", "Hanken Grotesk", sans-serif;
+  padding: clamp(56px, 7vw, 80px) 0 0;
+  border-top: 1px solid rgba(21, 18, 15, 0.06);
+}
+
+.footer__top {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--gutter) 48px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* Brand */
+.footer__brand {
+  max-width: 260px;
+}
+
+.footer__logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  text-decoration: none;
+  margin-bottom: 16px;
+}
+
+.footer__logo img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.footer__logo:hover img {
+  transform: scale(1.06);
+}
+
+.footer__studio-name {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #15120f;
+}
+
+.footer__tagline {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: rgba(28, 23, 18, 0.55);
+  margin: 0;
+}
+
+/* Columns */
+.footer__heading {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #b9975b;
+  margin: 0 0 18px;
+}
+
+.footer__col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer__col a,
+.footer__col li {
+  font-size: 0.92rem;
+  color: rgba(28, 23, 18, 0.7);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.footer__col a:hover {
+  color: #15120f;
+}
+
+/* Bottom bar */
+.footer__bottom {
+  border-top: 1px solid rgba(21, 18, 15, 0.08);
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 20px var(--gutter);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.8rem;
+  color: rgba(28, 23, 18, 0.4);
+  letter-spacing: 0.02em;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .footer__top {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+
+  .footer__brand {
+    grid-column: 1 / -1;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .footer {
+    padding-top: 48px;
+  }
+
+  .footer__top {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-bottom: 40px;
+  }
+
+  .footer__bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+}
