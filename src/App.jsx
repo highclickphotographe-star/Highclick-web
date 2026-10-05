@@ -35,7 +35,7 @@ export default function App() {
       <Hero />
       <About />
       <Films />
-      <Brands />
+      {/* <Brands /> */}
       <Services />
       {/* <Destination /> */}
       <Testimonial />
