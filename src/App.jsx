@@ -1,23 +1,20 @@
+import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { initSiteEffects } from "./siteEffects.js";
 
-import Decor from "./components/Decor.jsx";
 import Nav from "./components/Nav.jsx";
 import Hero from "./components/Hero.jsx";
 import About from "./components/About.jsx";
-import Films from "./components/Portfolio.jsx";
+import Portfolio from "./components/Portfolio.jsx";
 import Services from "./components/Services.jsx";
-import Destination from "./components/Destination.jsx";
-import Testimonial from "./components/Testimonial.jsx";
+import Testimonials from "./components/Testimonial.jsx";
 import Contact from "./components/Contact.jsx";
 import Footer from "./components/Footer.jsx";
-import Brands from "./components/Brands.jsx";
-// import Lightbox from "./components/Lightbox.jsx";
-// import VideoModal from "./components/VideoModal.jsx";
+import VideoModal from "./components/VideoModal.jsx";
+import Careers from "./components/Careers.jsx";
 
-export default function App() {
+function HomePage() {
   useEffect(() => {
-    // After components mount, run the original interactions
     const timer = setTimeout(() => {
       try {
         initSiteEffects();
@@ -30,19 +27,24 @@ export default function App() {
 
   return (
     <div id="hcs-root">
-      {/* <Decor /> */}
       <Nav />
       <Hero />
       <About />
-      <Films />
-      {/* <Brands /> */}
+      <Portfolio />
       <Services />
-      {/* <Destination /> */}
-      <Testimonial />
+      <Testimonials />
       <Contact />
       <Footer />
-      {/* <Lightbox /> */}
-      {/* <VideoModal /> */}
+      <VideoModal />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/careers" element={<Careers />} />
+    </Routes>
   );
 }

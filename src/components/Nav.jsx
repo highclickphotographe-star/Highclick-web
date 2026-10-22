@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Nav() {
   return (
     <>
@@ -6,20 +8,23 @@ export default function Nav() {
           {/* Left Links */}
           <ul className="nav-links nav-links-left">
             <li>
-              <a href="#home" className="is-active">
-                HOME
+              <a href="/#home" className="is-active">
+                Home
               </a>
             </li>
             <li>
-              <a href="#about">ABOUT</a>
+              <a href="/#about">About</a>
             </li>
             <li>
-              <a href="#films">PORTFOLIO</a>
+              <a href="/#films">Portfolio</a>
+            </li>
+            <li>
+              <a href="/#stories">Journal</a>
             </li>
           </ul>
 
           {/* Logo */}
-          <a href="#home" className="logo" aria-label="High Click Studio home">
+          <a href="/#home" className="logo" aria-label="High Click Studio home">
             <img
               className="mark"
               src="media/logo-hc.png"
@@ -33,10 +38,13 @@ export default function Nav() {
           <div className="nav-right-group">
             <ul className="nav-links nav-links-right">
               <li>
-                <a href="#services">SERVICES</a>
+                <a href="/#services">Services</a>
               </li>
               <li>
-                <a href="#stories">STORIES</a>
+                <Link to="/careers">Careers</Link>
+              </li>
+              <li>
+                <a href="/#contact">Contact</a>
               </li>
             </ul>
 
@@ -68,27 +76,32 @@ export default function Nav() {
       <div className="mobile-menu" id="mobileMenu">
         <span className="mobile-label">High Click Studio</span>
         <ul>
-          {[
-            ["#home", "HOME"],
-            ["#about", "ABOUT"],
-            ["#films", "PORTFOLIO"],
-            ["#services", "SERVICES"],
-            ["#stories", "STORIES"],
-            ["#contact", "CONTACT"],
-          ].map(([href, label], i) => (
-            <li key={href} style={{ "--i": i }}>
-              <a href={href}>{label}</a>
-            </li>
-          ))}
+          <li>
+            <a href="/#home">Home</a>
+          </li>
+          <li>
+            <a href="/#about">About</a>
+          </li>
+          <li>
+            <a href="/#films">Portfolio</a>
+          </li>
+          <li>
+            <a href="/#services">Services</a>
+          </li>
+          <li>
+            <Link to="/careers">Careers</Link>
+          </li>
+          <li>
+            <a href="/#contact">Contact</a>
+          </li>
         </ul>
         <a
           className="mobile-cta"
-          style={{ "--i": 6 }}
-          href="https://wa.me/919514284820?text=Hello%20High%20Click%20Studio%2C%20I%27d%20like%20to%20enquire."
+          href="https://wa.me/919514284820"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Inquire on WhatsApp
+          Chat on WhatsApp
         </a>
       </div>
     </>
